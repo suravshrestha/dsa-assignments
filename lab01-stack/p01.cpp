@@ -49,6 +49,12 @@ public:
     Space: O(1) */
     T pop()
     {
+        if (size == 0)
+        {
+            cout << "Stack is empty!\n";
+            return -1;
+        }
+        
         return arr[--size];
     }
 };
