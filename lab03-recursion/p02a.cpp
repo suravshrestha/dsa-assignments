@@ -1,4 +1,4 @@
-/* Find the nth Fibonacci number using tail recursion */
+/* Find the nth Fibonacci number using recursion (non-tail) */
 
 #include <iostream>
 
