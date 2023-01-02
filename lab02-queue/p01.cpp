@@ -14,7 +14,7 @@ private:
 public:
     Queue(int capacity)
     {
-        arr = new int[capacity];
+        arr = new T[capacity];
         front = -1;
         back = -1;
         this->capacity = capacity;
