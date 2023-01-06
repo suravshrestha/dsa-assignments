@@ -37,7 +37,7 @@ public:
         return new_node;
     }
 
-    /* Remove the last node and return its value
+    /* Delete the first node and return its value
     Time: O(1)
     Space: O(1) */
     int pop_front()
@@ -83,7 +83,7 @@ public:
         return new_node;
     }
 
-    /* Remove the first node and return its value
+    /* Delete the last node and return its value
     Time: O(n)
     Space: O(1) */
     int pop_back()
@@ -140,6 +140,8 @@ public:
         {
             tail = new_node;
         }
+
+        return new_node;
     }
 
     /* Delete the node after the given `node` and
@@ -195,6 +197,8 @@ public:
         Node *new_node = new Node{value};
         new_node->next = curr->next;
         curr->next = new_node;
+
+        return new_node;
     }
 
     void print()
