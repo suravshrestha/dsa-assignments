@@ -8,9 +8,9 @@ using namespace std;
 Space: O(n) */
 int fact(int n)
 {
-    if (n < 3)
+    if (n < 2)
     {
-        return n;
+        return 1;
     }
 
     return n * fact(n - 1);
