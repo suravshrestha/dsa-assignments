@@ -2,16 +2,17 @@
 
 using namespace std;
 
-struct Node
-{
-    int value;
-    Node *next = nullptr;
-};
-
 /* Singly linked list */
+template <class T>
 class LinkedList
 {
 private:
+    struct Node
+    {
+        T value;
+        Node *next = nullptr;
+    };
+
     Node *head;
     Node *tail;
     int size;
@@ -22,7 +23,7 @@ public:
     /* Insert a new node with `value` at the beginning of the list
     Time: O(1)
     Space: O(1) */
-    void push_front(int value)
+    void push_front(T value)
     {
         ++size;
 
@@ -40,7 +41,7 @@ public:
     /* Delete the first node and return its value
     Time: O(1)
     Space: O(1) */
-    int pop_front()
+    T pop_front()
     {
         if (!head)
         {
@@ -48,7 +49,7 @@ public:
             return -1;
         }
 
-        int value = head->value;
+        T value = head->value;
         Node *to_del = head;
         head = head->next;
 
@@ -68,7 +69,7 @@ public:
     /* Insert a new node with `value` at the end of the list
     Time: O(1)
     Space: O(1) */
-    void push_back(int value)
+    void push_back(T value)
     {   
         ++size;
 
@@ -86,7 +87,7 @@ public:
     /* Delete the last node and return its value
     Time: O(n)
     Space: O(1) */
-    int pop_back()
+    T pop_back()
     {
         if (!head)
         {
@@ -95,7 +96,7 @@ public:
         }
 
         --size;
-        int value = tail->value;
+        T value = tail->value;
         Node *curr = head;
 
         if (!head->next)
@@ -124,7 +125,7 @@ public:
     /* Insert a new node with `value` after given index `idx`
     Time: O(n)
     Space: O(1) */
-    void insert_after(int idx, int value)
+    void insert_after(int idx, T value)
     {
         if (idx < 0 || idx >= size)
         {
@@ -154,7 +155,7 @@ public:
     /* Delete the node after the given index `idx` and return its value
     Time: O(n)
     Space: O(1) */
-    int delete_after(int idx)
+    T delete_after(int idx)
     {
         if (idx < 0 || idx >= size - 1)
         {
@@ -169,7 +170,7 @@ public:
         }
 
         Node *to_del = curr->next;
-        int value = curr->next->value;
+        T value = curr->next->value;
         curr->next = curr->next->next;
 
         delete to_del;
@@ -187,7 +188,7 @@ public:
     /* Insert a new node with `value` before given index `idx`
     Time: O(n)
     Space: O(1) */
-    void insert_before(int idx, int value)
+    void insert_before(int idx, T value)
     {
         if (idx < 0 || idx >= size)
         {
@@ -235,7 +236,7 @@ public:
 
 int main()
 {
-    LinkedList list;
+    LinkedList<int> list;
 
     list.push_back(1);
     list.push_front(7);
