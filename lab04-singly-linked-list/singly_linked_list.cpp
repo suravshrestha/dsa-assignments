@@ -14,27 +14,27 @@ class LinkedList
 private:
     Node *head;
     Node *tail;
+    int size;
 
 public:
-    LinkedList() : head(nullptr), tail(nullptr) {}
+    LinkedList() : head(nullptr), tail(nullptr), size(0) {}
 
-    /* Insert a new node with `value` at the beginning of 
-    the list and return the new node
+    /* Insert a new node with `value` at the beginning of the list
     Time: O(1)
     Space: O(1) */
-    Node *push_front(int value)
+    void push_front(int value)
     {
+        ++size;
+
         Node *new_node = new Node{value};
         if (!head)
         {
             head = tail = new_node;
-            return new_node;
+            return;
         }
 
         new_node->next = head;
         head = new_node;
-
-        return new_node;
     }
 
     /* Delete the first node and return its value
@@ -61,26 +61,26 @@ public:
             tail = nullptr;
         }
 
+        --size;
         return value;
     }
 
-    /* Insert a new node with `value` at the end of 
-    the list and return the new node
+    /* Insert a new node with `value` at the end of the list
     Time: O(1)
     Space: O(1) */
-    Node *push_back(int value)
-    {
+    void push_back(int value)
+    {   
+        ++size;
+
         Node *new_node = new Node{value};
         if (!head)
         {
             head = tail = new_node;
-            return new_node;
+            return;
         }
 
         tail->next = new_node;
         tail = new_node;
-
-        return new_node;
     }
 
     /* Delete the last node and return its value
@@ -94,6 +94,7 @@ public:
             return -1;
         }
 
+        --size;
         int value = tail->value;
         Node *curr = head;
 
@@ -120,90 +121,102 @@ public:
         return value;
     }
 
-    /* Insert a new node with `value` after
-    the given `node` and return the new node
-    Time: O(1)
+    /* Insert a new node with `value` after given index `idx`
+    Time: O(n)
     Space: O(1) */
-    Node *insert_after(Node *node, int value)
+    void insert_after(int idx, int value)
     {
-        if (!node)
+        if (idx < 0 || idx >= size)
         {
-            cout << "Node insertion after `nullptr` not possible!\n";
-            return nullptr;
-        }
-
-        Node *new_node = new Node{value};
-        new_node->next = node->next;
-        node->next = new_node;
-
-        if (!new_node->next)
-        {
-            tail = new_node;
-        }
-
-        return new_node;
-    }
-
-    /* Delete the node after the given `node` and
-    return the value of the deleted node
-    Time: O(1)
-    Space: O(1) */
-    int delete_after(Node *node)
-    {
-        if (!node || !node->next)
-        {
-            cout << "Node deletion not possible!\n";
-            return -1;
-        }
-
-        int value = node->next->value;
-        Node *to_del = node->next;
-        node->next = node->next->next;
-
-        if (!head->next)
-        {
-            tail = head;
-        }
-
-        delete to_del;
-        to_del = nullptr;
-    }
-
-    /* Insert a new node with `value` before
-    the given `node` and return the new node
-    Time: O(1)
-    Space: O(1) */
-    Node *insert_before(Node *node, int value)
-    {
-        if (!node)
-        {
-            cout << "Node insertion before `nullptr` not possible!\n";
-            return nullptr;
-        }
-
-        if (node == head)
-        {
-            Node *new_node = push_front(value);
-            return new_node;
+            cout << "Invalid index!\n";
+            return;
         }
 
         Node *curr = head;
-        while(curr->next != node)
+        while (idx--)
         {
             curr = curr->next;
         }
 
-        /* `curr` is the node just before the given node */
         Node *new_node = new Node{value};
         new_node->next = curr->next;
         curr->next = new_node;
 
-        return new_node;
+        if (curr == tail)
+        {
+            /* Inserted after the last node */
+            tail = new_node;
+        }
+
+        ++size;
+    }
+
+    /* Delete the node after the given index `idx` and return its value
+    Time: O(n)
+    Space: O(1) */
+    int delete_after(int idx)
+    {
+        if (idx < 0 || idx >= size - 1)
+        {
+            cout << "Invalid index!\n";
+            return -1;
+        }
+
+        Node *curr = head;
+        while (idx--)
+        {
+            curr = curr->next;
+        }
+
+        Node *to_del = curr->next;
+        int value = curr->next->value;
+        curr->next = curr->next->next;
+
+        delete to_del;
+        to_del = nullptr;
+
+        if (!curr->next)
+        {
+            /* Deleted the last node */
+            tail = curr;
+        }
+
+        --size;
+    }
+
+    /* Insert a new node with `value` before given index `idx`
+    Time: O(n)
+    Space: O(1) */
+    void insert_before(int idx, int value)
+    {
+        if (idx < 0 || idx >= size)
+        {
+            cout << "Invalid index!\n";
+            return;
+        }
+
+        if (idx == 0)
+        {
+            push_front(value);
+            return;
+        }
+
+        Node *curr = head;
+        while (--idx)
+        {
+            curr = curr->next;
+        }
+
+        Node *new_node = new Node{value};
+        new_node->next = curr->next;
+        curr->next = new_node;
+
+        ++size;
     }
 
     void print()
     {
-        if (head == nullptr)
+        if (!head)
         {
             cout << "Empty list!\n";
             return;
@@ -224,12 +237,12 @@ int main()
 {
     LinkedList list;
 
-    Node *node1 = list.push_back(1);
-    Node *node2 = list.push_front(7);
+    list.push_back(1);
+    list.push_front(7);
     list.push_back(3);
 
-    list.insert_after(node1, 5);
-    list.insert_before(node2, 4);
+    list.insert_after(1, 5);
+    list.insert_before(0, 4);
 
     cout << "First node's value: " << list.pop_front() << '\n';
     cout << "Last node's value: " << list.pop_back() << '\n';
