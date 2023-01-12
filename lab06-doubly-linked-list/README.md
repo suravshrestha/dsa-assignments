@@ -3,7 +3,7 @@
 ---
 
 <p>
-  <a href="./lab06-doubly-linked-list/doubly_linked_list.cpp">Implement doubly linked linear list with the following operations:</a>
+  <a href="./doubly_linked_list.cpp">Implement doubly linked linear list with the following operations:</a>
 </p>
 
 Insertion:
