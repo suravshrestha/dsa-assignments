@@ -3,7 +3,7 @@
 ---
 
 <p>
-  <a href="./lab04-singly-linked-list/singly_linked_list.cpp">Implement singly linked linear list with the following operations:</a>
+  <a href="./singly_linked_list.cpp">Implement singly linked linear list with the following operations:</a>
 </p>
 
 Insertion:
