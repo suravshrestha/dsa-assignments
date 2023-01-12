@@ -183,6 +183,7 @@ public:
         }
 
         --size;
+        return value;
     }
 
     /* Insert a new node with `value` before given index `idx`
@@ -245,6 +246,10 @@ int main()
     list.insert_after(1, 5);
     list.insert_before(0, 4);
 
+    cout << "Before removing elements:\n";
+    list.print();
+
+    cout << "\nRemoving elements...\n";
     cout << "First node's value: " << list.pop_front() << '\n';
     cout << "Last node's value: " << list.pop_back() << '\n';
 
