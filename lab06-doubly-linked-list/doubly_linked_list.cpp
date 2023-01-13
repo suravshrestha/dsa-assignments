@@ -168,20 +168,7 @@ public:
             return;
         }
 
-        Node *curr = head;
-        while (--idx)
-        {
-            curr = curr->next;
-        }
-
-        Node *new_node = new Node{value};
-        new_node->next = curr->next;
-        new_node->prev = curr;
-        
-        curr->next->prev = new_node;
-        curr->next = new_node;
-
-        ++size;
+        insert_after(idx - 1, value);
     }
 
     /* Delete the node after the given index `idx` and return its value
