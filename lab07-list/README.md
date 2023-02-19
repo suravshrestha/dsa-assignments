@@ -5,8 +5,7 @@
 
 <ol>
   <li>
-    <a href="./p01.cpp">Implement list using array with the following operations:</a>
-  </li>
+  <a href="./p01.cpp">Implement list using array with the following operations:</a>
   <br>
   Insertion:
   
@@ -19,6 +18,7 @@
 
   - Delete last element
   - Delete first element
+  </li>
 
   <li>
     <a href="./p02.cpp">Implement queue using array implementation of list.</a>
