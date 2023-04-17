@@ -81,7 +81,7 @@ string infixToPrefix(string infix)
         st.pop();
     }
 
-    /* Reverse the postfix expression to obtain the infix expression */
+    /* Reverse the resulting postfix expression to obtain the prefix expression */
     l = res.size();
     for (int i = 0; i < l / 2; ++i)
     {
